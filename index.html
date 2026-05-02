@@ -23,7 +23,6 @@ body {
     overflow: hidden;
 }
 
-/* Fondo */
 .bg {
     position: fixed;
     inset: 0;
@@ -33,7 +32,6 @@ body {
     z-index: -1;
 }
 
-/* Contenedor */
 .container {
     text-align: center;
     max-width: 400px;
@@ -41,13 +39,11 @@ body {
     padding-top: 28px;
 }
 
-/* Logo */
 .logo {
     width: 210px;
     margin-bottom: 12px;
 }
 
-/* Texto */
 h1 {
     font-size: 28px;
     color: #ffcc00;
@@ -62,10 +58,9 @@ h2 {
     font-size: 18px;
     color: #a855f7;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(168,85,247,0.8);
 }
 
-/* Botón */
+/* BOTÓN */
 .btn {
     position: relative;
     display: inline-flex;
@@ -104,31 +99,32 @@ h2 {
     100% { transform: scale(1.3); opacity: 0;}
 }
 
-/* Barra */
+.whatsapp-icon {
+    width: 24px;
+}
+
+/* CONTADOR */
+.timer-text {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+/* BARRA */
 .timer-bar {
     width: 100%;
     height: 10px;
     background: rgba(255,255,255,0.2);
     border-radius: 20px;
     overflow: hidden;
-    margin-top: 25px;
+    margin-top: 8px;
 }
 
 .timer-fill {
     height: 100%;
     width: 100%;
     background: linear-gradient(90deg, #a855f7, #9333ea);
-    animation: countdown 20s linear forwards;
-}
-
-@keyframes countdown {
-    from { width: 100%; }
-    to { width: 0%; }
-}
-
-/* Icono */
-.whatsapp-icon {
-    width: 24px;
 }
 
 /* Footer */
@@ -151,7 +147,6 @@ h2 {
     <h2>canjea tu bono del 30% AHORA!</h2>
     <div class="extra">y comenzá a jugar</div>
 
-    <!-- BOTÓN -->
     <a id="btnWhats" class="btn" target="_blank">
         <svg class="whatsapp-icon" viewBox="0 0 32 32">
             <path fill="#25D366" d="M16.04 3C9.45 3 4.08 8.33 4.08 14.88c0 2.1.55 4.15 1.6 5.95L4 29l8.39-1.64a12.02 12.02 0 0 0 5.65 1.43h.01c6.59 0 11.96-5.33 11.96-11.89C30 8.33 22.63 3 16.04 3z"/>
@@ -160,9 +155,14 @@ h2 {
         CANJEAR BONO
     </a>
 
-    <!-- BARRA ABAJO -->
+    <!-- CONTADOR -->
+    <div class="timer-text" id="timerText">
+        Tiempo para canjear: 30 s
+    </div>
+
+    <!-- BARRA -->
     <div class="timer-bar">
-        <div class="timer-fill"></div>
+        <div class="timer-fill" id="timerFill"></div>
     </div>
 
     <img src="ganamos.png" class="footer-logo">
@@ -170,6 +170,23 @@ h2 {
 </div>
 
 <script>
+// contador
+let tiempo = 30;
+let barra = document.getElementById("timerFill");
+let texto = document.getElementById("timerText");
+
+let intervalo = setInterval(() => {
+    tiempo--;
+    texto.innerHTML = "Tiempo para canjear: " + tiempo + " s";
+    barra.style.width = (tiempo / 30) * 100 + "%";
+
+    if (tiempo <= 0) {
+        clearInterval(intervalo);
+        texto.innerHTML = "⛔ Bono expirado";
+    }
+}, 1000);
+
+// codigo whatsapp
 function generarCodigo() {
     return Math.floor(1000 + Math.random() * 9000);
 }
