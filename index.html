@@ -15,7 +15,6 @@
 
 body {
     min-height: 100vh;
-    background: black;
     color: white;
     display: flex;
     justify-content: center;
@@ -23,15 +22,19 @@ body {
     overflow: hidden;
 }
 
+/* FONDO PIRÁMIDE ELEGANTE */
 .bg {
     position: fixed;
     inset: 0;
-    background: url('https://images.unsplash.com/photo-1539650116574-75c0c6d0b6b8?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;
-    filter: blur(13px) brightness(0.38);
-    transform: scale(1.08);
+    background: 
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+        url('https://images.unsplash.com/photo-1505735458112-88f9d0e1b6c9?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;
+    filter: blur(8px) brightness(0.6);
+    transform: scale(1.1);
     z-index: -1;
 }
 
+/* CONTENEDOR */
 .container {
     text-align: center;
     max-width: 400px;
@@ -39,14 +42,16 @@ body {
     padding-top: 28px;
 }
 
+/* LOGO */
 .logo {
     width: 210px;
     margin-bottom: 12px;
 }
 
+/* TEXTOS */
 h1 {
     font-size: 28px;
-    color: #ffcc00;
+    color: #ffd700;
 }
 
 h2 {
@@ -103,11 +108,11 @@ h2 {
     width: 24px;
 }
 
-/* CONTADOR */
+/* CONTADOR GRIS */
 .timer-text {
     margin-top: 20px;
     font-size: 16px;
-    color: #ff4d4d;
+    color: #bfbfbf;
     font-weight: bold;
 }
 
@@ -127,10 +132,11 @@ h2 {
     background: linear-gradient(90deg, #a855f7, #9333ea);
 }
 
-/* Footer */
+/* LOGO ABAJO MÁS BAJO */
 .footer-logo {
-    margin-top: 30px;
+    margin-top: 60px;
     width: 200px;
+    opacity: 0.95;
 }
 </style>
 </head>
@@ -155,12 +161,10 @@ h2 {
         CANJEAR BONO
     </a>
 
-    <!-- CONTADOR -->
     <div class="timer-text" id="timerText">
         Tiempo para canjear: 30 s
     </div>
 
-    <!-- BARRA -->
     <div class="timer-bar">
         <div class="timer-fill" id="timerFill"></div>
     </div>
@@ -170,7 +174,6 @@ h2 {
 </div>
 
 <script>
-// contador
 let tiempo = 30;
 let barra = document.getElementById("timerFill");
 let texto = document.getElementById("timerText");
@@ -186,7 +189,6 @@ let intervalo = setInterval(() => {
     }
 }, 1000);
 
-// codigo whatsapp
 function generarCodigo() {
     return Math.floor(1000 + Math.random() * 9000);
 }
